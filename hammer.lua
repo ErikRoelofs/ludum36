@@ -7,21 +7,10 @@ return {
       smashing = false,
       progress = 0,
     }
-  
-    renderHammer = function(self)
-      love.graphics.setColor(255,255,255,255)    
-      love.graphics.draw(hammerModel.image, hammerModel.x, hammerModel.y, hammerModel.r, 2, 2, hammerModel.image:getWidth() / 2, hammerModel.image:getHeight())
-      
-      for _, j in ipairs(junkItems) do
-        love.graphics.draw(j.image, j.x, j.y, j.r, 1.5, 1.5, j.image:getWidth()/2, j.image:getHeight()/2)
-      end
-      
-    end
-  
+    
   end,
   update = function(dt)
-    hammerModel.x, hammerModel.y = love.mouse.getPosition()
-    hammerPane.offset = {hammerModel.x - hammerModel.image:getWidth()  / 2, hammerModel.y - hammerModel.image:getHeight()}
+    hammerModel.x, hammerModel.y = love.mouse.getPosition()    
     root:update(dt)
     
     if hammerModel.smashing == "down" then

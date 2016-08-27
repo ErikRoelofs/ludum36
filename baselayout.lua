@@ -3,17 +3,17 @@ looky:registerLayout("face", require("layouts/face")(looky))
 
 local root = looky:build("stackroot")
   
-serverRoomView = looky:build("grid", { rows = 4, columns = 4, width = "fill", height = "fill", padding = looky.padding(25), background = { 45, 35, 35, 255 } })
-for i = 1, 4 do
-  for j = 1, 4 do
-    serverRoomView:setChild( looky:build("computer"), i, j)
+serverRoomView = looky:build("grid", { rows = rows, columns = columns, width = "fill", height = "fill", padding = looky.padding(25), background = { 45, 35, 35, 255 } })
+for i = 1, rows do
+  for j = 1, columns do
+    serverRoomView:setChild( looky:build("computer", { model = getComputer(i,j)}), i, j)
   end
 end
 
 
-hammerPane = looky:build("freeform", {width = "fill", height="fill", render = renderHammer})
+overPane = looky:build("freeform", {width = "fill", height="fill", render = renderOvermap})
 
 root:addChild(serverRoomView)
-root:addChild(hammerPane)
+root:addChild(overPane)
 
 return root
