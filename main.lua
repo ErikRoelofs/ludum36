@@ -8,7 +8,7 @@ love.load = function()
   hammer.load()
   smoke = require "smoke"
   
-  love.mouse.setVisible(false)
+  love.mouse.setVisible(true)
 
   images = {
     monitor = love.graphics.newImage("images/monitor.png"),

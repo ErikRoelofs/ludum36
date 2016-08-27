@@ -10,7 +10,9 @@ return {
     
   end,
   update = function(dt)
-    hammerModel.x, hammerModel.y = love.mouse.getPosition()    
+    local x, y= love.mouse.getPosition()    
+    hammerModel.x = x + 85
+    hammerModel.y = y - 20
     root:update(dt)
     
     if hammerModel.smashing == "down" then
@@ -19,7 +21,7 @@ return {
       if hammerModel.progress > 1 then
         hammerModel.smashing = "up"
         hammerModel.progress = 0  
-        root:receiveOutsideSignal("hit", { type = "hammer" }, { { x = hammerModel.x - 85, y = hammerModel.y + 20} })
+        root:receiveOutsideSignal("hit", { type = "hammer" }, { { x = x, y = y} })
       end
     end
     
