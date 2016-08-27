@@ -21,9 +21,9 @@ love.load = function()
   
   root = looky:build("stackroot")
   
-  serverRoomView = looky:build("grid", { rows = 6, columns = 6, width = "fill", height = "fill", padding = looky.padding(25), background = { 45, 35, 35, 255 } })
-  for i = 1, 6 do
-    for j = 1, 6 do
+  serverRoomView = looky:build("grid", { rows = 4, columns = 4, width = "fill", height = "fill", padding = looky.padding(25), background = { 45, 35, 35, 255 } })
+  for i = 1, 4 do
+    for j = 1, 4 do
       serverRoomView:setChild( looky:build("computer"), i, j)
     end
   end
@@ -53,6 +53,7 @@ love.update = function(dt)
     if hammer.progress > 1 then
       hammer.smashing = "up"
       hammer.progress = 0  
+      root:receiveOutsideSignal("hit", { type = "hammer" }, { { x = hammer.x, y = hammer.y } })
     end
   end
   
@@ -69,7 +70,7 @@ end
 
 love.mousepressed = function()
   if not hammer.smashing then
-    hammer.smashing = "down"    
+    hammer.smashing = "down"  
   end
 end
 
