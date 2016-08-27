@@ -2,7 +2,7 @@ return {
   load = function()
     smokeItems = {}
     
-    makeSmoke = function(x,y)
+    makeSmoke = function(x,y, faction)
       
       local psystem = love.graphics.newParticleSystem(images.smoke, 32)
       psystem:setParticleLifetime(1, 2)
@@ -12,8 +12,11 @@ return {
       psystem:setAreaSpread("uniform", 75, 10)
       psystem:setLinearAcceleration(-100, -100, 100, -50) -- Random movement in all directions.
       psystem:setRadialAcceleration(0,2)	
-      --psystem:setColors(80, 80, 80, 200, 80, 80, 80, 100) -- Fade to transparency.
-      psystem:setColors(220, 220, 220, 200, 220, 220, 220, 100) -- Fade to transparency.
+      if faction == "bad" then
+        psystem:setColors(80, 80, 80, 200, 80, 80, 80, 100) -- Fade to transparency.
+      else
+        psystem:setColors(220, 220, 220, 200, 220, 220, 220, 100) -- Fade to transparency.
+      end
       psystem:setSizes( 0.5, 2 )
            
       local smoke = {
@@ -27,7 +30,7 @@ return {
     
     root:addListener({ smoke = function(self, signal, payload, coords)
       if signal == "croaked" then      
-        makeSmoke(coords[1].x,coords[1].y)
+        makeSmoke(coords[1].x,coords[1].y, payload.faction)
       end
     end}, "smoke")
 

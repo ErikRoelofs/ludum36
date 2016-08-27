@@ -30,7 +30,7 @@ return function(looky)
           self.health = self.health - 1
           if self.health == 0 then            
             face:setExpression("dead")
-            self:messageOut("croaked", {child = self}, {{x=coords[1].x,y=coords[1].y}})
+            self:messageOut("croaked", {child = self, faction = options.model.side}, {{x=coords[1].x,y=coords[1].y}})
           else
             face:setExpression("sad", 1)
           end

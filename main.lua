@@ -27,9 +27,13 @@ love.load = function()
   
   for i = 1, rows do
     for j = 1, columns do
+      local faction = "bad"
+      if math.random(0,1) == 1 then
+        faction = "good"
+      end
       table.insert(computers, { 
           name = "(" .. i .. "," .. j .. ")" ,
-          side = "bad"
+          side = faction
       })
     end
   end
