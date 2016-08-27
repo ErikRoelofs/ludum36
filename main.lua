@@ -14,10 +14,13 @@ love.load = function()
   }
   junkData = { 
     images = {
-      love.graphics.newImage("images/bolt.png") 
+      love.graphics.newImage("images/junk/bolt.png"),
+      love.graphics.newImage("images/junk/screw.png"),
+      love.graphics.newImage("images/junk/nut.png"),
+      love.graphics.newImage("images/junk/wingnut.png"),
       
     },
-    dx = { 75, 100 },
+    dx = { 25, 100 },
     dy = { 90, 120 },
     dr = { 10, 30 },
     ay = 600
@@ -39,7 +42,7 @@ love.load = function()
         dy = -1 * math.random(junkData.dy[1], junkData.dy[2]),
         r = math.random(1,100), 
         dr = direction() * math.random(junkData.dr[1], junkData.dr[2]),
-        image = junkData.images[1]
+        image = junkData.images[math.random(1, #junkData.images)]
       }
       table.insert(junkItems, junk)
     end
@@ -67,7 +70,7 @@ love.load = function()
   
   root:addListener({ junk = function(self, signal, payload, coords)
     if signal == "smashed" then      
-      makeJunk(coords[1].x,coords[1].y,10)
+      makeJunk(coords[1].x,coords[1].y,25)
     end
   end}, "junk")
   
@@ -83,7 +86,7 @@ love.load = function()
     love.graphics.draw(hammer.image, hammer.x, hammer.y, hammer.r, 2, 2, hammer.image:getWidth() / 2, hammer.image:getHeight())
     
     for _, j in ipairs(junkItems) do
-      love.graphics.draw(j.image, j.x, j.y, j.r, 1, 1, j.image:getWidth()/2, j.image:getHeight()/2)
+      love.graphics.draw(j.image, j.x, j.y, j.r, 1.5, 1.5, j.image:getWidth()/2, j.image:getHeight()/2)
     end
     
   end
