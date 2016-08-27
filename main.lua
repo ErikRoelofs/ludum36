@@ -8,10 +8,13 @@ love.load = function()
   hammer = {
     image = love.graphics.newImage("images/hammer.png"),
     x = 0,
-    y = 0
+    y = 0,
+    smashing = false,
+    progress = 0,
   }
   
   looky = require "looky"
+  ease = require "easy"
   
   looky:registerLayout("computer", require("layouts/computer")(looky))
   looky:registerLayout("face", require("layouts/face")(looky))
@@ -25,9 +28,11 @@ love.load = function()
     end
   end
   
-  hammerPane = looky:build("dragbox", {width = "fill", height="fill"})
-  hammerView = looky:build("image", {width="wrap", height="wrap", file=hammer.image})
-  hammerPane:addChild(hammerView)
+  renderHammer = function(self)
+    love.graphics.setColor(255,255,255,255)    
+    love.graphics.draw(hammer.image, hammer.x, hammer.y, hammer.r, 2, 2, hammer.image:getWidth() / 2, hammer.image:getHeight())
+  end
+  hammerPane = looky:build("freeform", {width = "fill", height="fill", render = renderHammer})
   
   root:addChild(serverRoomView)
   root:addChild(hammerPane)
@@ -41,6 +46,31 @@ love.update = function(dt)
   hammer.x, hammer.y = love.mouse.getPosition()
   hammerPane.offset = {hammer.x - hammer.image:getWidth()  / 2, hammer.y - hammer.image:getHeight()}
   root:update(dt)
+  
+  if hammer.smashing == "down" then
+    hammer.progress = hammer.progress + (dt*5)
+    hammer.r = -ease("quintin", hammer.progress)
+    if hammer.progress > 1 then
+      hammer.smashing = "up"
+      hammer.progress = 0  
+    end
+  end
+  
+  if hammer.smashing == "up" then
+    hammer.progress = hammer.progress + (dt*3)
+    hammer.r = ease("circinout", hammer.progress) - 1
+    if hammer.progress > 1 then
+      hammer.smashing = nil
+      hammer.progress = 0
+    end
+  end
+  
+end
+
+love.mousepressed = function()
+  if not hammer.smashing then
+    hammer.smashing = "down"    
+  end
 end
 
 love.draw = function()
