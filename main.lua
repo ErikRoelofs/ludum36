@@ -125,11 +125,15 @@ love.update = function(dt)
     end
   end
   
-  for _, j in ipairs(junkItems) do
+  for k = #junkItems, 1, -1 do
+    local j = junkItems[k]
     j.x = j.x + ( j.dx * dt )
     j.y = j.y + ( j.dy * dt )
     j.dy = j.dy + ( junkData.ay * dt )
     j.r = j.r + ( j.dr * dt )
+    if j.y > serverRoomView:grantedHeight() then
+      table.remove(junkItems, k)
+    end
   end
   
 end
