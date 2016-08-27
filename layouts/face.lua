@@ -19,7 +19,6 @@ return function(looky)
         end
       end
       
-      
       container.update = function(self, dt)
         if self.delay > 0 then
           self.delay = self.delay - dt
