@@ -27,6 +27,11 @@ return function(looky)
       case.externalSignalHandlers.hit = function(self, signal, payload, coords)
         if payload.type == "hammer" and self:coordsInMe( coords[1].x, coords[1].y ) and self.health > 0 then 
           self.health = self.health - 1
+          if self.health == 0 then
+            face:setExpression("dead")
+          else
+            face:setExpression("sad", 1)
+          end
           self:messageOut("smashed", {child = self}, coords)
         end
       end

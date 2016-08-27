@@ -47,6 +47,16 @@ love.load = function()
   
   junkItems = {}
   
+  images = {
+    monitor = love.graphics.newImage("images/monitor.png")
+  }
+  faces = {
+    smile = love.graphics.newImage("images/faces/smile.png"),
+    sad = love.graphics.newImage("images/faces/sad.png"),
+    dead = love.graphics.newImage("images/faces/dead.png"),
+    
+  }
+  
   looky = require "looky"
   ease = require "easy"
   
