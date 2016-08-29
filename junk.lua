@@ -14,7 +14,7 @@ return {
       ay = 600  
     }
     direction = function()
-      if math.random(0,1) == 0 then
+      if love.math.random(0,1) == 0 then
         return -1
       else
         return 1
@@ -23,13 +23,13 @@ return {
     makeJunk = function(x,y,amount)
       for i = 1, amount do
         local junk = {
-          x = x + math.random(-20,20),
-          y = y + math.random(-20,20),
-          dx = direction() * math.random(junkData.dx[1], junkData.dx[2]), 
-          dy = -1 * math.random(junkData.dy[1], junkData.dy[2]),
-          r = math.random(1,100), 
-          dr = direction() * math.random(junkData.dr[1], junkData.dr[2]),
-          image = junkData.images[math.random(1, #junkData.images)]
+          x = x + love.math.random(-20,20),
+          y = y + love.math.random(-20,20),
+          dx = direction() * love.math.random(junkData.dx[1], junkData.dx[2]), 
+          dy = -1 * love.math.random(junkData.dy[1], junkData.dy[2]),
+          r = love.math.random(1,100), 
+          dr = direction() * love.math.random(junkData.dr[1], junkData.dr[2]),
+          image = junkData.images[love.math.random(1, #junkData.images)]
         }
         table.insert(junkItems, junk)
       end

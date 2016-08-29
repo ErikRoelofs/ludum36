@@ -1,11 +1,45 @@
 defaultState = function( model )
   return {
       model = model,
+      options = {
+        "smile", "laugh", "wink", "happy"
+      },
+      timeInState = 0,
+      switch = 0,
       enter = function(self)        
-        self.model.expr:overrideExpr("smile")
+        self.model.expr:overrideExpr(self.options[love.math.random(1,#self.options)])
+        self.switch = love.math.random(1,150)
       end,
       update = function(self, dt)
-        
+        self.timeInState = self.timeInState + (dt*10)
+        if self.timeInState >= self.switch then
+          return defaultState(self.model)
+        end
+      end,
+      leave = function(self)
+      end,
+  }
+end
+
+defaultEvilState = function( model )
+  return {
+      model = model,
+      timeInState = 0,
+      goEvil = 0,
+      switch = 0,
+      enter = function(self)        
+        self.model.expr:overrideExpr("smile")
+        self.goEvil = love.math.random(1,150)
+        self.switch = love.math.random(1,200)
+      end,
+      update = function(self, dt)
+        self.timeInState = self.timeInState + (dt*10)
+        if self.timeInState >= self.switch then
+          return defaultEvilState(self.model)
+        end
+        if self.timeInState >= self.goEvil then
+          return evilState(self.model)
+        end
       end,
       leave = function(self)
       end,
@@ -32,11 +66,15 @@ end
 evilState = function( model )
   return {
       model = model,
+      duration = 2,
       enter = function(self)
         self.model.expr:overrideExpr("evil")
       end,
       update = function(self, dt)
-        
+        self.duration = self.duration - dt
+        if self.duration <= 0 then
+          return defaultEvilState(self.model)
+        end
       end,
       leave = function(self)
         
@@ -124,7 +162,7 @@ newComputer = function(name, faction, behavior)
           table.insert(self.stack, { expr = "static", duration = self.transDuration })
         end
       end,
-      stack = { { expr = "smile", duration = "base" } },
+      stack = {},
     },    
     isAlive = function(self)
       return self.health > 0
@@ -148,7 +186,14 @@ newComputer = function(name, faction, behavior)
       return self.expr:currentExpression()
     end,
 
-  }  
-  model.state = defaultState(model)
+  }
+  if model.faction == "good" then
+    model.state = defaultState(model)
+    model.state:enter()
+  elseif model.faction == "bad" then
+    model.state = defaultEvilState(model)
+    model.state:enter()
+  end
+    
   return model
 end

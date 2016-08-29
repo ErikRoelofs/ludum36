@@ -19,6 +19,9 @@ love.load = function()
   }
   faces = {
     smile = love.graphics.newImage("images/faces/smile.png"),
+    wink = love.graphics.newImage("images/faces/wink.png"),
+    happy = love.graphics.newImage("images/faces/happy.png"),
+    laugh = love.graphics.newImage("images/faces/laugh.png"),
     sad = love.graphics.newImage("images/faces/sad.png"),
     dead = love.graphics.newImage("images/faces/dead.png"),    
     evil = love.graphics.newImage("images/faces/evil.png"),    
@@ -33,7 +36,7 @@ love.load = function()
   for i = 1, rows do
     for j = 1, columns do
       local faction = "bad"
-      if math.random(0,1) == 1 then
+      if love.math.random(0,1) == 1 then
         faction = "good"
       end
       table.insert(computers, newComputer("(" .. i .. "," .. j .. ")", faction))
