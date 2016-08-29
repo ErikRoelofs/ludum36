@@ -23,6 +23,7 @@ love.load = function()
     dead = love.graphics.newImage("images/faces/dead.png"),    
     evil = love.graphics.newImage("images/faces/evil.png"),    
     static = love.graphics.newImage("images/faces/static.png"),
+    off = love.graphics.newImage("images/faces/off.png"),
   }
   
   rows = 4
