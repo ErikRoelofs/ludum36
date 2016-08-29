@@ -43,9 +43,9 @@ local behaviors = {
             target = pickRandomNonEvilComputer()
           end
           return {
-            msg = "attack",
+            msg = msg,
             origin = self.computer,
-            target = pickRandomNonEvilComputer()
+            target = target
           }        
         end      
       end,    
