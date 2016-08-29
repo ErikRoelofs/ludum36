@@ -3,7 +3,7 @@ return function(looky)
     build = function(options)      
       local case = looky:build("linear", { width = "wrap", height="wrap", direction = "h"})      
       
-      local face = looky:build("face", { state = options.model.state})
+      local face = looky:build("face", { model = options.model})
       
       local rightSide = looky:build("linear", { width = "wrap", height="wrap", direction = "v"})
       

@@ -20,8 +20,9 @@ love.load = function()
   faces = {
     smile = love.graphics.newImage("images/faces/smile.png"),
     sad = love.graphics.newImage("images/faces/sad.png"),
-    dead = love.graphics.newImage("images/faces/dead.png"),
-    
+    dead = love.graphics.newImage("images/faces/dead.png"),    
+    evil = love.graphics.newImage("images/faces/evil.png"),    
+    static = love.graphics.newImage("images/faces/static.png"),
   }
   
   rows = 4
@@ -75,6 +76,9 @@ love.update = function(dt)
   hammer.update(dt)
   smoke.update(dt)
   
+  for i = 1, rows * columns do 
+    computers[i]:update(dt)
+  end
 end
 
 love.mousepressed = function(x,y,button)

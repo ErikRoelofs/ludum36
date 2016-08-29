@@ -2,7 +2,7 @@ return function(looky)
   return {
     build = function(options)
       local container = looky:build("stack", { width = "wrap", height = "wrap", background = { 255, 0, 0, 255 } })
-      container.state = options.state
+      container.model = options.model
       
       local face = looky:build("image", {width="wrap", height="wrap", file=faces.smile})
       local monitor = looky:build("image", {width="wrap", height="wrap", file=images.monitor})
@@ -15,7 +15,7 @@ return function(looky)
       end
       
       container.update = function(self, dt)
-        expr = self.state:getExpression()
+        expr = self.model:getExpression()
         if self.curExpr ~= expr then
           self.curExpr = expr
           self:getChild(2):setImage(faces[expr])
@@ -25,7 +25,7 @@ return function(looky)
       return container
     end,
     schema = {
-      state = {
+      model = {
         required = true,
         schemaType = "table",
         options = {},
