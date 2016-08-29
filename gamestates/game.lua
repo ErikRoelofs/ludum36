@@ -4,8 +4,8 @@ return function()
     transitionTime = 0,
     transitioning = false,
     load = function(self)
-      rows = 4
-      columns = 4
+      rows = 5
+      columns = 5
       computers = {}
       
       for i = 1, rows do

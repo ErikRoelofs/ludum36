@@ -60,6 +60,12 @@ love.mousepressed = function(x,y,button)
   state:mousepressed(x,y,button)
 end
 
+love.keypressed = function(key)
+  if key == "q" or key == "escape" then
+    love.event.quit()
+  end
+end
+
 love.draw = function()
   state:draw()  
 end

@@ -1,7 +1,7 @@
 return function(looky)
   return {
-    build = function(options)      
-      local case = looky:build("linear", { width = "wrap", height="wrap", direction = "h"})      
+    build = function(options)          
+      local case = looky:build("linear", { width = "fill", height="fill", direction = "h", padding = looky.padding(0, 40, 0, 0)})      
       
       local face = looky:build("face", { model = options.model})
       
