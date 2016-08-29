@@ -6,10 +6,10 @@ love.load = function()
   require "computer/computerModel"
   require "computer/behaviors"
   
-  junk = require "junk"
-  hammer = require "hammer"
+  junk = require "gamestates/game/junk"
+  hammer = require "gamestates/game/hammer"
   hammer.load()
-  smoke = require "smoke"
+  smoke = require "gamestates/game/smoke"
   
   love.mouse.setVisible(true)
 
@@ -47,7 +47,7 @@ love.load = function()
     return computers[i + ((j-1) * columns)]
   end
   
-  victory = require "victory"
+  victory = require "gamestates/game/victory"()  
   victory:load()
 
   renderOvermap = function(self)
