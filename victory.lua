@@ -37,9 +37,7 @@ return
     local margin = 3 + math.floor( badSmashed / 3 )
     local marginLeft = margin - goodSmashed
     
-    local out = (badLeft / (badLeft + marginLeft)) * 100
-    --print(out)
-    return out
+    return math.min((badLeft / (badLeft + marginLeft)) * 100, 100)
   end,    
   currentProgress = function(self)
     return self.current
@@ -54,5 +52,19 @@ return
       self.progress = self.progress + ( dt / self.animLength )
       self.current = self.start + ( ease('quintin', self.progress ) * ( self.goal - self.start ) )
     end
-  end
+    
+    if self:hasWon() then
+      print( "win" )      
+    end
+    if self:hasLost() then
+      print( "lose" )
+    end
+    
+  end,
+  hasWon = function(self)
+    return getBadComputerCount() == 0
+  end,
+  hasLost = function(self)
+    return self:target() == 100
+  end,
  }
