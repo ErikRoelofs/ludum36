@@ -14,7 +14,7 @@ return function()
           if love.math.random(0,1) == 1 then
             faction = "good"
           end
-          table.insert(computers, newComputer("(" .. i .. "," .. j .. ")", faction))
+          table.insert(computers, newComputer("(" .. i .. "," .. j .. ")", i, j, faction))
         end
       end
 
@@ -44,6 +44,7 @@ return function()
       
       junk.load()
       smoke.load()
+      messagesListener.load()
     end,
     update = function(self, dt)
       junk.update(dt)

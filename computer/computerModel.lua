@@ -119,11 +119,13 @@ deadState = function( model )
   }
 end
 
-newComputer = function(name, faction, behavior)
+newComputer = function(name, x, y, faction, behavior)
   local model = {  
     health = 3,
     maxHealth = 3,
     name = name,
+    x = x,
+    y = y,
     faction = faction,
     behavior = getBehavior(behavior),
     update = function(self, dt)      
@@ -171,6 +173,7 @@ newComputer = function(name, faction, behavior)
       return self.health > 0
     end,
     takeHit = function(self)
+      print("auch :(")
       self.health =  self.health - 1
       if self:isAlive() then        
         self:changeState( sadState(self) )

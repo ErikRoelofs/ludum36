@@ -6,11 +6,13 @@ love.load = function()
   -- initial load of static data
   require "computer/computerModel"
   require "computer/behaviors"
+  require "pathing"
   
   junk = require "gamestates/game/junk"
   hammer = require "gamestates/game/hammer"
   hammer.load()
   smoke = require "gamestates/game/smoke"
+  messagesListener = require "gamestates/game/messages"  
   
   images = {
     monitor = love.graphics.newImage("images/monitor.png"),
@@ -28,6 +30,12 @@ love.load = function()
     off = love.graphics.newImage("images/faces/off.png"),
   }
   
+  messages = {
+    bubble = love.graphics.newImage("images/bubble.png"),
+    attack = love.graphics.newImage("images/icons/attack.png"),
+    
+  }
+  
   looky = require "looky"
   ease = require "easy"  
   layout = require "baselayout"
@@ -35,6 +43,8 @@ love.load = function()
   -- register layouts
   looky:registerLayout("computer", require("layouts/computerView")(looky))
   looky:registerLayout("face", require("layouts/face")(looky))
+  looky:registerLayout("bubble", require("layouts/comm")(looky))
+  looky:registerLayout("commcontrol", require("layouts/commcontrol")(looky))
 
   -- game states
   gameState = require "gamestates/game"
