@@ -4,9 +4,9 @@ return function()
     
   local mainscreen = looky:build("linear", { width = "fill", height = "fill", direction = "v" })
 
-  progress = looky:build("numberAsBar", { width = "fill", height = 50, value = function() return victory:currentProgress() end, maxValue = 100, filledColor = { 255, 0, 0, 255 }, background = { 0, 0, 255, 255 }})
+  progress = looky:build("progress")
 
-  serverRoomView = looky:build("grid", { rows = rows, columns = columns, width = "fill", height = "fill", padding = looky.padding(100, 10, 10, 10), background = { file = "images/cablebackground.png", fill = "fit" } })
+  serverRoomView = looky:build("grid", { rows = rows, columns = columns, width = "fill", height = "fill", padding = looky.padding(100, 10, 10, 10), background = { file = "images/cablebackground2.png", fill = "fit" } })
   for i = 1, rows do
     for j = 1, columns do
       serverRoomView:setChild( looky:build("computer", { model = getComputer(i,j)}), i, j)

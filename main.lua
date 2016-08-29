@@ -16,7 +16,10 @@ love.load = function()
   
   images = {
     monitor = love.graphics.newImage("images/monitor.png"),
-    smoke = love.graphics.newImage("images/junk/smoke.png")
+    smoke = love.graphics.newImage("images/junk/smoke.png"),
+    win = love.graphics.newImage("images/win.png"),
+    lose = love.graphics.newImage("images/lose.png"),
+    marker = love.graphics.newImage("images/progress.png"),
   }
   faces = {
     smile = love.graphics.newImage("images/faces/smile.png"),
@@ -46,6 +49,7 @@ love.load = function()
   looky:registerLayout("face", require("layouts/face")(looky))
   looky:registerLayout("bubble", require("layouts/comm")(looky))
   looky:registerLayout("commcontrol", require("layouts/commcontrol")(looky))
+  looky:registerLayout("progress", require("layouts/progress")(looky))
 
   -- game states
   gameState = require "gamestates/game"
