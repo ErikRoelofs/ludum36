@@ -10,7 +10,7 @@ return function()
     end,
     update = function(self, dt)
       if self.transition then
-        return gameState
+        return menuState
       end
     end,
     mousepressed = function(self, x, y, button)

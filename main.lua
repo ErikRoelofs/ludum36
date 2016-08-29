@@ -29,6 +29,7 @@ love.load = function()
     win = love.graphics.newImage("images/win.png"),
     lose = love.graphics.newImage("images/lose.png"),
     marker = love.graphics.newImage("images/progress.png"),
+    intro = love.graphics.newImage("images/intro.png"),
   }
   faces = {
     smile = love.graphics.newImage("images/faces/smile.png"),
@@ -66,8 +67,8 @@ love.load = function()
   winState = require "gamestates/win"
   loseState = require "gamestates/lose"
   
-  state = gameState()
-  state.load()
+  state = menuState()
+  state:load()
   
 end
 
