@@ -1,7 +1,7 @@
 return function(looky)
   return {
     build = function(options)
-      local container = looky:build("image", { width = "wrap", height = "wrap", background = { file = messages.bubble, fill = "fit" }, file = messages.attack })
+      local container = looky:build("image", { width = "wrap", height = "wrap", background = { file = messages.bubble, fill = "fit" }, file = messages[options.msg] })
       container.path = options.path
       container.target = options.target
       container.msg = options.msg
@@ -31,6 +31,10 @@ return function(looky)
             {
               required = true,
               schemaType = "number"
+            },
+            {
+              required = true,
+              schemaType = "string"
             }
           }
         }

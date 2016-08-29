@@ -5,7 +5,7 @@ end
 return {
   load = function()
     root:addListener({ message = function(self, signal, payload, coords)
-      if signal == "msg" then              
+      if signal == "msg" and payload.msg == "attack" then
         payload.target:takeHit()
       end          
     end}, "message")

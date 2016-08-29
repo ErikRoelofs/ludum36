@@ -8,13 +8,21 @@ return function()
       columns = 5
       computers = {}
       
+      local pickBehavior = function(faction)
+        if faction == "good" then
+          return "passivegood"
+        elseif faction == "bad" then
+          return "standardevil"
+        end
+      end
+      
       for i = 1, rows do
         for j = 1, columns do
           local faction = "bad"
           if love.math.random(0,1) == 1 then
             faction = "good"
           end
-          table.insert(computers, newComputer("(" .. i .. "," .. j .. ")", j, i, faction))
+          table.insert(computers, newComputer("(" .. i .. "," .. j .. ")", j, i, faction, pickBehavior(faction)))
         end
       end
 

@@ -2,7 +2,7 @@ defaultState = function( model )
   return {
       model = model,
       options = {
-        "smile", "laugh", "wink", "happy"
+        "smile", "laugh", "wink", "happy", "ecg"
       },
       timeInState = 0,
       switch = 0,
@@ -133,9 +133,11 @@ newComputer = function(name, x, y, faction, behavior)
       if newState then
         self:changeState(newState)
       end
-      local newMsg = self.behavior:update(dt)
-      if newMsg then
-        createNewMessage(newMsg)
+      if self:isAlive() then
+        local newMsg = self.behavior:update(dt)
+        if newMsg then
+          createNewMessage(newMsg)
+        end
       end
     end,
     expr = {

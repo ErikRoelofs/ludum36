@@ -28,12 +28,13 @@ love.load = function()
     evil = love.graphics.newImage("images/faces/evil.png"),    
     static = love.graphics.newImage("images/faces/static.png"),
     off = love.graphics.newImage("images/faces/off.png"),
+    ecg = love.graphics.newImage("images/faces/ecg.png"),
   }
   
   messages = {
     bubble = love.graphics.newImage("images/bubble.png"),
     attack = love.graphics.newImage("images/icons/attack.png"),
-    
+    babble = love.graphics.newImage("images/icons/babble.png"),
   }
   
   looky = require "looky"

@@ -2,7 +2,10 @@ return function(looky)
   return {
     build = function(options)
       local container = looky:build("aquarium", { width = "fill", height = "fill"})
-      container.childSpeed = 200
+      container.childSpeed = {
+          slow = 50,
+          fast = 400,
+      }
       
       function container:newMessage(msg, from, to)
         local path = getPathFromComputerToComputer(from.y, from.x, to.y, to.x)
@@ -16,7 +19,7 @@ return function(looky)
         for i, c in ipairs(self:getChildren()) do
           
           local x, y = self:getOffset(c)
-          local targetX, targetY = c.path[1][1], c.path[1][2]
+          local targetX, targetY, spd = c.path[1][1], c.path[1][2], c.path[1][3]
           
           if x == targetX and y == targetY and #c.path == 1 then
             -- done! deliver the message and drop the bubble
@@ -27,22 +30,22 @@ return function(looky)
             if x == targetX and y == targetY then
               table.remove(c.path, 1)
               -- get the new target
-              targetX, targetY = c.path[1][1], c.path[1][2]
+              targetX, targetY, spd = c.path[1][1], c.path[1][2], c.path[1][3]
             end
             
             -- move closer to our (new) target
             if x < targetX then
-              x = math.min( x + self.childSpeed * dt, targetX )
+              x = math.min( x + self.childSpeed[spd] * dt, targetX )
             end
             if x > targetX then
-              x = math.max( x - self.childSpeed * dt, targetX )
+              x = math.max( x - self.childSpeed[spd] * dt, targetX )
             end
             
             if y < targetY then
-              y = math.min( y + self.childSpeed * dt, targetY )
+              y = math.min( y + self.childSpeed[spd] * dt, targetY )
             end
             if y > targetY then
-              y = math.max( y - self.childSpeed * dt, targetY )
+              y = math.max( y - self.childSpeed[spd] * dt, targetY )
             end
             
             -- actually move the child
