@@ -16,12 +16,19 @@ return function()
         end
       end
       
+      -- between 5 and 10 bad AI per game
+      local factions = {}
+      for i = 1, 10 do
+        table.insert(factions, "bad")
+      end
+      for i = 1, 20 do
+        table.insert(factions, "good")
+      end
+      shuffle(factions)
+      
       for i = 1, rows do
         for j = 1, columns do
-          local faction = "bad"
-          if love.math.random(0,1) == 1 then
-            faction = "good"
-          end
+          local faction = factions[i + ((j-1) * columns)]          
           table.insert(computers, newComputer("(" .. i .. "," .. j .. ")", j, i, faction, pickBehavior(faction)))
         end
       end

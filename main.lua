@@ -1,6 +1,15 @@
 if arg[#arg] == "-debug" then debug = true else debug = false end
 if debug then require("mobdebug").start() end
 
+function shuffle(tbl)
+  size = #tbl
+  for i = size, 1, -1 do
+    local rand = love.math.random(size)
+    tbl[i], tbl[rand] = tbl[rand], tbl[i]
+  end
+  return tbl
+end
+
 love.load = function()
   
   -- initial load of static data

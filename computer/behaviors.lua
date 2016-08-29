@@ -26,12 +26,22 @@ local behaviors = {
         self:setWait()
       end,
       setWait = function(self)
-        self.delay = love.math.random(200,1500) / 100
+        self.delay = love.math.random(200,1000) / 100
       end,
       update = function(self, dt)
         self.delay = self.delay - dt
         if self.delay < 0 then
-          self:setWait()
+          self:setWait()          
+          local msg = "attack"
+          if love.math.random(1,3) == 1 then
+            msg = "babble"
+          end
+          local target
+          if love.math.random(1,3) == 3 then
+            target = pickRandomComputer()
+          else
+            target = pickRandomNonEvilComputer()
+          end
           return {
             msg = "attack",
             origin = self.computer,
@@ -48,7 +58,7 @@ local behaviors = {
         self:setWait()
       end,
       setWait = function(self)
-        self.delay = love.math.random(200,1500) / 100
+        self.delay = love.math.random(200,1000) / 100
       end,
       update = function(self, dt)
         self.delay = self.delay - dt
