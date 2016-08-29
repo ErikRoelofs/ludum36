@@ -5,7 +5,6 @@ love.load = function()
   
   require "computer/computerModel"
   require "computer/behaviors"
-  require "victory"
   
   junk = require "junk"
   hammer = require "hammer"
@@ -48,6 +47,9 @@ love.load = function()
     return computers[i + ((j-1) * columns)]
   end
   
+  victory = require "victory"
+  victory:load()
+
   renderOvermap = function(self)
     love.graphics.setColor(255,255,255,255)    
     love.graphics.draw(hammerModel.image, hammerModel.x, hammerModel.y, hammerModel.r, 2, 2, hammerModel.image:getWidth() / 2, hammerModel.image:getHeight())
@@ -84,6 +86,8 @@ love.update = function(dt)
   for i = 1, rows * columns do 
     computers[i]:update(dt)
   end
+  
+  victory:update(dt)
 end
 
 love.mousepressed = function(x,y,button)
