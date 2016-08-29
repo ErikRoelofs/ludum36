@@ -1,6 +1,4 @@
 return function()
-  looky:registerLayout("computer", require("layouts/computerView")(looky))
-  looky:registerLayout("face", require("layouts/face")(looky))
 
   local root = looky:build("stackroot")
     

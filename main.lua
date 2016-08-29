@@ -32,14 +32,28 @@ love.load = function()
   ease = require "easy"  
   layout = require "baselayout"
 
-  -- specific load for a game
-  state = require "gamestates/game"()
+  -- register layouts
+  looky:registerLayout("computer", require("layouts/computerView")(looky))
+  looky:registerLayout("face", require("layouts/face")(looky))
+
+  -- game states
+  gameState = require "gamestates/game"
+  menuState = require "gamestates/menu"
+  winState = require "gamestates/win"
+  loseState = require "gamestates/lose"
+  
+  state = gameState()
   state.load()
   
 end
 
 love.update = function(dt)
- state:update(dt)
+ local newState = state:update(dt)
+ if newState then
+   state:unload()
+   state = newState()
+   state:load()
+  end
 end
 
 love.mousepressed = function(x,y,button)

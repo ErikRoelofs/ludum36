@@ -47,15 +47,7 @@ return function()
       if self.progress < 1 then
         self.progress = self.progress + ( dt / self.animLength )
         self.current = self.start + ( ease('quintin', self.progress ) * ( self.goal - self.start ) )
-      end
-      
-      if self:hasWon() then
-        print( "win" )      
-      end
-      if self:hasLost() then
-        print( "lose" )
-      end
-      
+      end          
     end,
     hasWon = function(self)
       return self.getBadComputerCount() == 0

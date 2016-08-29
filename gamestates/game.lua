@@ -1,5 +1,8 @@
 return function()
   return {
+    transitionState = nil,
+    transitionTime = 0,
+    transitioning = false,
     load = function(self)
       rows = 4
       columns = 4
@@ -52,12 +55,37 @@ return function()
       end
       
       victory:update(dt)
+      
+      if not self.transitioning then
+        if victory:hasWon() then
+          self.transitioning = true
+          self.transitionTime = 3
+          self.transitionState = winState
+        end
+        if victory:hasLost() then
+          self.transitioning = true
+          self.transitionTime = 3
+          self.transitionState = loseState
+        end
+      end
+      
+      if self.transitioning then
+        self.transitionTime = self.transitionTime - dt
+        if self.transitionTime < 0 then
+          return self.transitionState
+        end
+      end
     end,
     mousepressed = function(self, x, y, button)
-      hammer.mousepressed(x,y,button)
+      if not self.transitioning then
+        hammer.mousepressed(x,y,button)
+      end
     end,
     draw = function(self)
       root:render()
+    end,
+    unload = function(self)
+      
     end
   }
 end
