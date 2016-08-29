@@ -14,7 +14,7 @@ return function()
           if love.math.random(0,1) == 1 then
             faction = "good"
           end
-          table.insert(computers, newComputer("(" .. i .. "," .. j .. ")", i, j, faction))
+          table.insert(computers, newComputer("(" .. i .. "," .. j .. ")", j, i, faction))
         end
       end
 
