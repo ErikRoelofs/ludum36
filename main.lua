@@ -5,6 +5,7 @@ love.load = function()
   
   require "computer/computerModel"
   require "computer/behaviors"
+  require "victory"
   
   junk = require "junk"
   hammer = require "hammer"
@@ -77,7 +78,7 @@ end
 love.update = function(dt)
  
   junk.update(dt)
-  hammer.update(dt)
+  hammer:update(dt)
   smoke.update(dt)
   
   for i = 1, rows * columns do 
