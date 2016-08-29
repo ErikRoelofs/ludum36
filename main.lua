@@ -3,6 +3,9 @@ if debug then require("mobdebug").start() end
 
 love.load = function()
   
+  require "computer/computerModel"
+  require "computer/behaviors"
+  
   junk = require "junk"
   hammer = require "hammer"
   hammer.load()
@@ -31,10 +34,7 @@ love.load = function()
       if math.random(0,1) == 1 then
         faction = "good"
       end
-      table.insert(computers, { 
-          name = "(" .. i .. "," .. j .. ")" ,
-          side = faction
-      })
+      table.insert(computers, newComputer("(" .. i .. "," .. j .. ")", faction))
     end
   end
 

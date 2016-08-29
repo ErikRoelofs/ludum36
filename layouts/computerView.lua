@@ -2,9 +2,8 @@ return function(looky)
   return {
     build = function(options)      
       local case = looky:build("linear", { width = "wrap", height="wrap", direction = "h"})      
-      case.health = 3
       
-      local face = looky:build("face")
+      local face = looky:build("face", { state = options.model.state})
       
       local rightSide = looky:build("linear", { width = "wrap", height="wrap", direction = "v"})
       
@@ -14,8 +13,8 @@ return function(looky)
       local leds = looky:build("image", { width = "wrap", height = "wrap", file = "images/ledspane.png" })
       --local leds = looky:build("text", { width = "wrap", height = "wrap", data = function() return options.model.name end })
       local hearts = looky:build("numberAsImage", { width = 87, height = 30, value = function(self) 
-            return case.health end, 
-      maxValue = 3, image = "images/heart.png", background = { 70, 70, 70, 255 }})
+            return options.model.health end, 
+      maxValue = options.model.maxHealth, image = "images/heart.png", background = { 70, 70, 70, 255 }})
       
       case:addChild(face)
       case:addChild(rightSide)
@@ -26,13 +25,10 @@ return function(looky)
       
       -- handle twacks
       case.externalSignalHandlers.hit = function(self, signal, payload, coords)
-        if payload.type == "hammer" and self:coordsInMe( coords[1].x, coords[1].y ) and self.health > 0 then 
-          self.health = self.health - 1
-          if self.health == 0 then            
-            face:setExpression("dead")
+        if payload.type == "hammer" and self:coordsInMe( coords[1].x, coords[1].y ) and options.model:isAlive() then 
+          local died = options.model:takeHit()
+          if died then
             self:messageOut("croaked", {child = self, faction = options.model.side}, {{x=coords[1].x,y=coords[1].y}})
-          else
-            face:setExpression("sad", 1)
           end
           self:messageOut("smashed", {child = self}, {{x=coords[1].x,y=coords[1].y}})
         end

@@ -2,7 +2,7 @@ return function(looky)
   return {
     build = function(options)
       local container = looky:build("stack", { width = "wrap", height = "wrap", background = { 255, 0, 0, 255 } })
-      container.delay = 0
+      container.state = options.state
       
       local face = looky:build("image", {width="wrap", height="wrap", file=faces.smile})
       local monitor = looky:build("image", {width="wrap", height="wrap", file=images.monitor})
@@ -10,28 +10,27 @@ return function(looky)
       container:addChild(monitor)
       container:addChild(face)      
       
-      container.setExpression = function(self, expr, duration)        
-        self:getChild(2):setImage(faces[expr])        
-        if duration ~= nil then
-          container.delay = duration
-        else
-          container.delay = 0
-        end
+      container.setExpression = function(self, expr)
+          self:getChild(2):setImage(faces[expr])        
       end
       
       container.update = function(self, dt)
-        if self.delay > 0 then
-          self.delay = self.delay - dt
-        
-          if self.delay <= 0 then
-            self:getChild(2):setImage(faces["smile"])
-          end
+        expr = self.state:getExpression()
+        if self.curExpr ~= expr then
+          self.curExpr = expr
+          self:getChild(2):setImage(faces[expr])
         end
       end
       
       return container
     end,
     schema = {
+      state = {
+        required = true,
+        schemaType = "table",
+        options = {},
+        allowOther = true
+      }
     }
   }
 end
