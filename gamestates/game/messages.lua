@@ -1,15 +1,14 @@
+createNewMessage = function(msg)
+  commPane:newMessage(msg.msg, msg.origin, msg.target)
+end
+
 return {
   load = function()
-    print("loaded")
     root:addListener({ message = function(self, signal, payload, coords)
-      print( "listening :D")
-      print(signal)
-      if signal == "msg" then      
-        print("sending hit")
+      if signal == "msg" then              
         payload.target:takeHit()
-      end
+      end          
     end}, "message")
 
   end,  
 }
-  

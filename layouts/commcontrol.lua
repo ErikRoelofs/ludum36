@@ -8,6 +8,7 @@ return function(looky)
         local path = getPathFromComputerToComputer(from.y, from.x, to.y, to.x)
         local x, y = path[1][1], path[1][2]
         self:addChild(looky:build("bubble", { target = to, msg = msg, path = path}),x,y)
+        self:layoutingPass()
       end
     
       function container:update(dt)

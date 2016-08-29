@@ -126,13 +126,16 @@ newComputer = function(name, x, y, faction, behavior)
     name = name,
     x = x,
     y = y,
-    faction = faction,
-    behavior = getBehavior(behavior),
+    faction = faction,    
     update = function(self, dt)      
       self.expr:update(dt)
       local newState = self.state:update(dt)
       if newState then
         self:changeState(newState)
+      end
+      local newMsg = self.behavior:update(dt)
+      if newMsg then
+        createNewMessage(newMsg)
       end
     end,
     expr = {
@@ -168,19 +171,20 @@ newComputer = function(name, x, y, faction, behavior)
         end
       end,
       stack = {},
-    },    
+    },
     isAlive = function(self)
       return self.health > 0
     end,
     takeHit = function(self)
-      print("auch :(")
-      self.health =  self.health - 1
-      if self:isAlive() then        
-        self:changeState( sadState(self) )
-        return false
-      else
-        self:changeState( dyingState(self) )
-        return true
+      if self:isAlive() then
+        self.health =  self.health - 1
+        if self:isAlive() then        
+          self:changeState( sadState(self) )
+          return false
+        else
+          self:changeState( dyingState(self) )
+          return true
+        end
       end
     end,
     changeState = function(self, newState)
@@ -200,6 +204,8 @@ newComputer = function(name, x, y, faction, behavior)
     model.state = defaultEvilState(model)
     model.state:enter()
   end
+    
+  model.behavior = getBehavior(model, behavior)
     
   return model
 end

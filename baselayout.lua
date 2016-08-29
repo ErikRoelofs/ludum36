@@ -13,10 +13,8 @@ return function()
     end
   end
 
-  local commPane = looky:build("commcontrol")
-  commPane:newMessage("attack", getComputer(1,1), getComputer(1,3))
-  --commPane:newMessage("attack", getComputer(2,3), getComputer(3,4))
-  --commPane:newMessage("attack", getComputer(4,5), getComputer(2,3))
+  commPane = looky:build("commcontrol")
+--  commPane:newMessage("attack", getComputer(1,1), getComputer(1,3))
 
   overPane = looky:build("freeform", {width = "fill", height="fill", render = renderOvermap})
 
