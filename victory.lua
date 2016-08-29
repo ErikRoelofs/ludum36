@@ -8,3 +8,13 @@ getBadComputerCount = function()
   end
   return bad
 end
+
+getTotalComputerCount = function()
+  local total = 0
+  for i = 1, #computers do
+    if computers[i]:isAlive() then
+      total = total + 1
+    end
+  end
+  return total  
+end

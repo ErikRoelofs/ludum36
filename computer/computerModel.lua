@@ -24,11 +24,14 @@ end
 defaultEvilState = function( model )
   return {
       model = model,
+      options = {
+        "smile", "laugh", "wink", "happy"
+      },
       timeInState = 0,
       goEvil = 0,
       switch = 0,
       enter = function(self)        
-        self.model.expr:overrideExpr("smile")
+        self.model.expr:overrideExpr(self.options[love.math.random(1,#self.options)])
         self.goEvil = love.math.random(1,150)
         self.switch = love.math.random(1,200)
       end,
