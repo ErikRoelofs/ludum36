@@ -1,12 +1,11 @@
 return function()
-  return {    
+  return {
     load = function(self)
       self.transition = false
       
       root = looky:build("root")
-      root:addChild(looky:build("image", { width = "fill", height = "fill", file = images.losescreen, background = { 255,255,255,255} }))
+      root:addChild(looky:build("image", { width = "fill", height = "fill", file = images.openingscreen, background = { 255,255,255,255} }))
       root:layoutingPass()
-      
     end,
     update = function(self, dt)
       if self.transition then

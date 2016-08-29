@@ -4,7 +4,7 @@ return function()
       self.transition = false
       
       root = looky:build("root")
-      root:addChild(looky:build("text", { width = "fill", height = "fill", data = function() return "WIN" end, gravity = { "center", "center" } }))
+      root:addChild(looky:build("image", { width = "fill", height = "fill", file = images.winscreen, background = { 255,255,255,255} }))
       root:layoutingPass()
       
     end,

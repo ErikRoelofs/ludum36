@@ -30,6 +30,9 @@ love.load = function()
     lose = love.graphics.newImage("images/lose.png"),
     marker = love.graphics.newImage("images/progress.png"),
     intro = love.graphics.newImage("images/intro.png"),
+    losescreen = love.graphics.newImage("images/losescreen.png"),
+    winscreen = love.graphics.newImage("images/winscreen.png"),
+    openingscreen = love.graphics.newImage("images/openingscreen.png"),
   }
   faces = {
     smile = love.graphics.newImage("images/faces/smile.png"),
@@ -62,12 +65,13 @@ love.load = function()
   looky:registerLayout("progress", require("layouts/progress")(looky))
 
   -- game states
+  openingState = require "gamestates/opening"
   gameState = require "gamestates/game"
   menuState = require "gamestates/menu"
   winState = require "gamestates/win"
   loseState = require "gamestates/lose"
   
-  state = menuState()
+  state = openingState()
   state:load()
   
 end
